@@ -72,9 +72,9 @@ if __name__ == '__main__':
     averageloss = totalloss / float(weeks)
 
     log('Started on: %d/%d/%d' % (startdate.month, startdate.day, startdate.year))
-    log('Starting weight: %d lbs' % weightdata[0][1])
-    log('Current weight: %d lbs' % weightdata[-1][1])
-    log('Total weight lost: %d lbs' % totalloss)
+    log('Starting weight (lbs): %d' % weightdata[0][1])
+    log('Current weight (lbs): %d' % weightdata[-1][1])
+    log('Total weight lost (lbs): %d' % totalloss)
     log('Total # of days: %d' % totaltime.days)
     log('Total # of weeks: %d' % weeks)
     log('Average lbs/week lost: %.1f' % averageloss)
