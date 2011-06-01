@@ -4,9 +4,10 @@
 #  weight.py
 #  weight
 #  
-#  Created by Jay Roberts on 2011-06-01.
-#  Copyright 2011 DesignHammer. All rights reserved.
+#  Created by Jay Roberts on 2011-06-01
 # 
+#  You can do whatever you want with this. :)
+#
 
 import sys
 import csv

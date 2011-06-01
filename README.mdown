@@ -1,3 +1,5 @@
 # LoseIt Weight Parser
 
 A script that reads a weight trend csv file downloaded from loseit.com and presents a summary of the data.
+
+You can do whatever you want with this. :)
