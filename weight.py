@@ -59,8 +59,6 @@ if __name__ == '__main__':
     except:
         startdate = datetime.datetime.today() - datetime.timedelta(weeks=12)
 
-    print startdate
-
     # Read weight csv
     weightdata = [(parseDate(row[0]), float(row[1])) for row in weightrows[1:] if parseDate(row[0]) >= startdate]
 
