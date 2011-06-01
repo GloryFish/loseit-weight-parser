@@ -42,26 +42,31 @@ if __name__ == '__main__':
         exit()
 
     weightcsv = csv.reader(weightfile)
+    weightrows = [row for row in weightcsv]
+    weightrows = weightrows[1:] # Remove header line
+    
+    weightcsv = None
+    weightfile.close()
 
     # Get the start date from the commandline
     startdate = None
     try:
         startdate = parseDate(sys.argv[2])
     except:
-        startdate = datetime.date.today() - datetime.timedelta(weeks=12)
+        startdate = datetime.datetime.today() - datetime.timedelta(weeks=12)
 
     log('Processing data since %s' % str(startdate))
 
     # Read weight csv
+    weightdata = [(parseDate(row[0]), float(row[1])) for row in weightrows[1:] if parseDate(row[0]) >= startdate]
 
-    weightdata = []
+    weightdata = sorted(weightdata, key=lambda row:row[0])
 
-    weightdata = [list]
+    for row in weightdata:
+        print row
 
 
-    # for row in weightcsv:
-        
-        
+
         
 
 
