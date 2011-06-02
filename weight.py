@@ -28,8 +28,6 @@ def parseDate(datestring):
     
 if __name__ == '__main__':
     
-    log('')
-    
     # load the weight file
     filename = None
     try:
@@ -60,7 +58,7 @@ if __name__ == '__main__':
         startdate = datetime.datetime.today() - datetime.timedelta(weeks=12)
 
     # Read weight csv
-    weightdata = [(parseDate(row[0]), float(row[1])) for row in weightrows[1:] if parseDate(row[0]) >= startdate]
+    weightdata = [(parseDate(row[0]), float(row[1])) for row in weightrows if parseDate(row[0]) >= startdate]
 
     weightdata = sorted(weightdata, key=lambda row:row[0])
         
