@@ -73,8 +73,9 @@ if __name__ == '__main__':
     log('Starting weight (lbs): %d' % weightdata[0][1])
     log('Current weight (lbs): %d' % weightdata[-1][1])
     log('Total weight lost (lbs): %d' % totalloss)
-    log('Total # of days: %d' % totaltime.days)
-    log('Total # of weeks: %d' % weeks)
+    log('# of days: %d' % totaltime.days)
+    log('# of weeks: %d' % weeks)
+    log('# of months: %d' % int(weeks // 4))
     log('Average lbs/week lost: %.1f' % averageloss)
 
     log('')
