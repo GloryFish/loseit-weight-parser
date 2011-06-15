@@ -61,6 +61,13 @@ if __name__ == '__main__':
     weightdata = [(parseDate(row[0]), float(row[1])) for row in weightrows if parseDate(row[0]) >= startdate]
 
     weightdata = sorted(weightdata, key=lambda row:row[0])
+
+    # Get goal weight from the commandline
+    goalweight = None
+    try:
+        goalweight = int(sys.argv[3])
+    except:
+        goalweight = None
         
     log('')
 
@@ -68,6 +75,13 @@ if __name__ == '__main__':
     weeks = int(totaltime.days // 7.0)
     totalloss = weightdata[0][1] - weightdata[-1][1]
     averageloss = totalloss / float(weeks)
+
+    # Calculate number of weeks required to hit goal weight 
+    goaldate = None
+    if goalweight != None:
+        tolose = goalweight - weightdata[-1][1]
+        weeksleft = tolose / averageloss
+        goaldate = datetime.datetime.today() + datetime.timedelta(weeks=weeksleft)
 
     log('Started on: %d/%d/%d' % (startdate.month, startdate.day, startdate.year))
     log('Starting weight (lbs): %d' % weightdata[0][1])
@@ -77,5 +91,8 @@ if __name__ == '__main__':
     log('# of weeks: %d' % weeks)
     log('# of months: %d' % int(weeks // 4))
     log('Average lbs/week lost: %.1f' % averageloss)
+    
+    if goalweight != None:
+        log('Goal (%dlbs) will be reached on %d/%d/%d' % (goalweight, goaldate.month, goaldate.day, goaldate.year))
 
     log('')

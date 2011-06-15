@@ -16,15 +16,22 @@ You can optionally specify a starting date and the script will parse all records
     weight.py path/to/weights.csv 4/11/2011
 
 
+You can optionally specify a goal weight and the script will tell you when you will hit that goal based on your current average weekly weight loss:
+
+        weight.py path/to/weights.csv 4/11/2011 180
+
+
 The script will output a summary that looks like:
 
     Started on: 4/11/2011
-    Starting weight: 247 lbs
-    Current weight: 235 lbs
-    Total weight lost: 12 lbs
-    Total # of days: 50
-    Total # of weeks: 7
-    Average lbs/week lost: 1.7
+    Starting weight (lbs): 247
+    Current weight (lbs): 231
+    Total weight lost (lbs): 16
+    # of days: 65
+    # of weeks: 9
+    # of months: 2
+    Average lbs/week lost: 1.8
+    Goal (180lbs) will be reached on 11/26/2010
 
 ## Format
 
