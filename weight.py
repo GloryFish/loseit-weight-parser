@@ -1,11 +1,11 @@
 #! /usr/bin/python
 
-# 
+#
 #  weight.py
 #  weight
-#  
+#
 #  Created by Jay Roberts on 2011-06-01
-# 
+#
 #  You can do whatever you want with this. :)
 #
 
@@ -13,11 +13,12 @@ import sys
 import csv
 import datetime
 import dateutil.parser
+from operator import itemgetter
 
 def log(message):
     sys.stdout.write('%s\n' % message)
     sys.stdout.flush()
-    
+
 def parseDate(datestring):
     try:
         date = dateutil.parser.parse(datestring)
@@ -25,9 +26,9 @@ def parseDate(datestring):
     except:
         log('Couldn\'t parse date: %s' % str(datestring))
         return False
-    
+
 if __name__ == '__main__':
-    
+
     # load the weight file
     filename = None
     try:
@@ -45,8 +46,8 @@ if __name__ == '__main__':
 
     weightcsv = csv.reader(weightfile)
     weightrows = [row for row in weightcsv]
-    weightrows = weightrows[1:] # Remove header line
-    
+    weightrows = sorted(weightrows[1:], key=itemgetter(0)) # Remove header line and sort
+
     weightcsv = None
     weightfile.close()
 
@@ -55,7 +56,8 @@ if __name__ == '__main__':
     try:
         startdate = parseDate(sys.argv[2])
     except:
-        startdate = datetime.datetime.today() - datetime.timedelta(weeks=12)
+        # Use first date from the csv
+        startdate = parseDate(weightrows[0][0])
 
     # Read weight csv
     weightdata = [(parseDate(row[0]), float(row[1])) for row in weightrows if parseDate(row[0]) >= startdate]
@@ -68,7 +70,7 @@ if __name__ == '__main__':
         goalweight = int(sys.argv[3])
     except:
         goalweight = None
-        
+
     log('')
 
     totaltime =  weightdata[-1][0] - startdate
@@ -76,7 +78,7 @@ if __name__ == '__main__':
     totalloss = weightdata[0][1] - weightdata[-1][1]
     averageloss = totalloss / float(weeks)
 
-    # Calculate number of weeks required to hit goal weight 
+    # Calculate number of weeks required to hit goal weight
     goaldate = None
     if goalweight != None:
         tolose = goalweight - weightdata[-1][1]
@@ -91,7 +93,7 @@ if __name__ == '__main__':
     log('# of weeks: %d' % weeks)
     log('# of months: %d' % int(weeks // 4))
     log('Average lbs/week lost: %.1f' % averageloss)
-    
+
     if goalweight != None:
         log('Goal (%dlbs) will be reached on %d/%d/%d' % (goalweight, goaldate.month, goaldate.day, goaldate.year))
 
