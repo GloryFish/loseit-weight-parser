@@ -77,6 +77,8 @@ if __name__ == '__main__':
     weeks = int(totaltime.days // 7.0)
     totalloss = weightdata[0][1] - weightdata[-1][1]
     averageloss = totalloss / float(weeks)
+    lowweight = min(row[1] for row in weightdata)
+    highweight = max(row[1] for row in weightdata)
 
     # Calculate number of weeks required to hit goal weight
     goaldate = None
@@ -87,12 +89,15 @@ if __name__ == '__main__':
 
     log('Started on: %d/%d/%d' % (startdate.month, startdate.day, startdate.year))
     log('Starting weight (lbs): %d' % weightdata[0][1])
+    log('Highest weight (lbs): %d' % highweight)
+    log('Lowest weight (lbs): %d' % lowweight)
     log('Current weight (lbs): %d' % weightdata[-1][1])
     log('Total weight lost (lbs): %d' % totalloss)
     log('# of days: %d' % totaltime.days)
     log('# of weeks: %d' % weeks)
     log('# of months: %d' % int(weeks // 4))
     log('Average lbs/week lost: %.1f' % averageloss)
+    log('Lowest weight: %.1f' % lowweight)
 
     if goalweight != None:
         log('Goal (%dlbs) will be reached on %d/%d/%d' % (goalweight, goaldate.month, goaldate.day, goaldate.year))
